@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}新人獎{% endblock %}
+
+{% block head %}
+<title>Christmas Night</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+{% endblock %}
+
+{% block content %}
+<div id="templatemo_wrapper_outter">
+    <div id="templatemo_wrapper_inner">
+        <div id="templatemo_wrapper">
+            <div id="templatemo_header">
+                <div id="site_title">
+                    <h1></h1>
+                </div>
+            </div> <!-- end of header -->
+
+            <div class="outer-wrapper">
+
+                <div id="templatemo_main">
+                    <div class="col_fw">
+                        <div class="header-container">
+                            <h3 class="highlight-title">
+                                新雲啟航獎
+                            </h3>
+                            {% include 'partials/drawing_groups.html' %}
+                        </div>
+                        <div class="details">
+                            作為加雲的潛力新秀，已經準備好大展身手，為團隊注入嶄新能量!
+                        </div>
+                        <div class="bonus-title-container">
+                            <h3 class="bonus-title">
+                                NT 600 元
+                            </h3>
+                        </div>
+                        <div class="table-container">
+                            <div class="table">
+                                <div class="table-row">
+                                    <div class="table-cell">編號</div>
+                                    <div class="table-cell">名字</div>
+                                </div>
+                                {% for employee in employees[:8] %}
+                                <div style="display: flex">
+                                    <div class="id-cell">{{ employee.id }}</div>
+                                    <div class="name-cell">{{ employee.name }}</div>
+                                </div>
+                                <hr>
+                                {% endfor %}
+                            </div>
+                            <div class="table">
+                                <div class="table-row">
+                                    <div class="table-cell">編號</div>
+                                    <div class="table-cell">名字</div>
+                                </div>
+                                {% for employee in employees[8:] %}
+                                <div style="display: flex">
+                                    <div class="id-cell">{{ employee.id }}</div>
+                                    <div class="name-cell">{{ employee.name }}</div>
+                                </div>
+                                <hr>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end of templatemo main -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div id="templatemo_footer">
+    Copyright &copy; 2024 ICPSI
+</div>
+{% endblock %}

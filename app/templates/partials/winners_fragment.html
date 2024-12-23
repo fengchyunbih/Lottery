@@ -1,0 +1,29 @@
+<!-- templates/winners_fragment.html -->
+<div class="lottery-winners-table">
+    <div class="lottery-winners-table-row">
+        <div class="lottery-winners-table-cell">員工編號</div>
+        <div class="lottery-winners-table-cell">姓名</div>
+        <div style="margin-left: 30%">抽出時間</div>
+        <div style="margin-left: 30%">操作</div>
+    </div>
+
+    {% for winner in winners %}
+    <div style="display: flex" id="winner-{{ winner.employee_code }}">
+        <div class="lottery-winners-id-cell">{{ winner.employee_code }}</div>
+        <div class="lottery-winners-name-cell">
+            {{ winner.name_chinese }} {{ winner.name_english }}
+        </div>
+        <div class="lottery-winners-time-cell">
+            {{ winner.draw_time }}
+        </div>
+        <div class="lottery-winners-time-cell" style="justify-content: flex-end;">
+            {% if winner.redraw != 0 %}
+            <span class="caac">New</span>
+            {% endif %}
+            <button class="btn reassign-btn" data-employee-code="{{ winner.employee_code }}"
+                data-gift-id="{{ gift_id }}">重抽</button>
+        </div>
+    </div>
+    <hr style="width: 95%">
+    {% endfor %}
+</div>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    {% block head %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/templatemo_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slider_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ddsmoothmenu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/members_styles.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/drawing_scripts.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <!-- Navigation menu can go here -->
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        {% block footer %}
+
+        {% endblock %}
+    </footer>
+</body>
+
+</html>

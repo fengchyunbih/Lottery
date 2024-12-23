@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}抽獎{% endblock %}
+
+{% block head %}
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+<style>
+    table {
+        background-color: #f07e04e6;
+        backdrop-filter: blur(10px);
+        border-collapse: collapse;
+        width: 90%;
+        margin: 0 auto;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th {
+        height: 50px;
+        padding: 10px;
+        color: white;
+        font-size: 22px;
+        background-color: #302317;
+    }
+
+    td {
+        text-align: center;
+        padding: 10px;
+    }
+
+    @keyframes myAnimation {
+        0% {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="templatemo_wrapper_outter">
+    <div id="templatemo_wrapper_inner">
+        <div id="templatemo_wrapper">
+            <div id="templatemo_header">
+            </div> <!-- end of header -->
+            <div class="outer-wrapper">
+                <div id="templatemo_main">
+                    <div class="header-container" style="margin: 20px">
+                        <!-- <a class="back-button" href="{% if gift %}/gifts?drawing_group={{ gift.drawing_group }}{% else %}javascript:history.back(){% endif %}">返回選單</a> -->
+                        <a class="back-button"
+                            href="{{ gift and '/gifts?drawing_group=' + gift.drawing_group|string or 'javascript:history.back()' }}">返回選單</a>
+
+                    </div>
+                    <div id="animation-container">
+                        <div style="display: flex; justify-content: center; align-items: center">
+                            <img id="my-animation" src="{{ url_for('static', filename='images/Treasure_Box.gif') }}"
+                                alt="Treasure Box">
+                        </div>
+                    </div>
+
+
+                    {% if gift %}
+
+                    <div id="gift-container" data-gift-id="{{ gift.gift_id }}" data-gift-drawn="{{ gift.drawn }}"
+                        style="display: none">
+                        <div class="image-container">
+                            <div style="width: 130px">
+                                <span class="gift-id-box">
+                                    <span>NO.</span>
+                                    {{ gift.order_in_group }}
+                                </span>
+                            </div>
+                            <img src="{{ url_for('static', filename='images/gift-name.png') }}" class="gift-image"
+                                alt="Gift Image">
+                            <div class="text-overlay">
+                                <h2 class="gift-name">{{ gift.gift_description }}</h2>
+                            </div>
+                        </div>
+
+
+                        {% set gift_image = 'money.png' if gift.gift_id >= 18 else gift.gift_id ~ '.png' %}
+                        <img class="gift-display-image"
+                            src="{{ url_for('static', filename='images/gifts/' ~ gift_image) }}" alt="Gift Image"
+                            style="width: 35%; height: auto;">
+                    </div>
+                </div>
+
+                <div id="award-table" style="display: none">
+                    {%include 'partials/winners_fragment.html' %}
+                </div>
+                {% else %}
+                <div class="error-message">請先選擇要抽出的獎項！</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div id="templatemo_footer">
+    Copyright &copy; 2024 ICPSI
+</div>
+{% endblock %}

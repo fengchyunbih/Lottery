@@ -1,0 +1,10 @@
+<form action="#" method="get">
+    <select class="ac" id="myselect" name="group" onchange="drawing_groups_onchange_handler(event)">
+        {% for item in drawing_groups %}
+        <option style="background-color: {{ item.background_color }}" value="{{ item.value }}" {% if
+            item.value==drawing_group %} selected {% endif %}>
+            {{ item.group_name }}
+        </option>
+        {% endfor %}
+    </select>
+</form>

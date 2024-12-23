@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}獎品{% endblock %}
+
+{% block head %}
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<style>
+    body {
+        position: relative;
+        top: 0px;
+        left: 0px;
+    }
+
+    table {
+        background-color: #fff;
+        backdrop-filter: blur(10px);
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 8px;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    .table-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .table-item {
+        width: 48%;
+        margin: 10px;
+        border: 2px solid rgba(255, 209, 143, 1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+    }
+
+    .table-item table {
+        width: 100%;
+        table-layout: fixed;
+        box-sizing: border-box;
+        border-collapse: collapse;
+    }
+
+    tr:nth-child(odd) td {
+        background-color: #fff;
+    }
+
+    .table-item td:nth-child(1) {
+        width: 19%;
+    }
+
+    .table-item td:nth-child(2) {
+        width: 80%;
+    }
+
+    .table-item td:nth-child(3) {
+        width: 15%;
+    }
+
+    .table-item td:nth-child(4) {
+        width: 21%;
+    }
+    td {
+        padding: 10px !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="templatemo_wrapper_outter">
+    <div id="templatemo_wrapper_inner">
+        <div id="templatemo_wrapper">
+            <div id="templatemo_header">
+                <div id="site_title">
+                    <h1></h1>
+                </div>
+            </div> <!-- end of header -->
+        <div class="outer-wrapper">    
+            <div id="templatemo_main">
+                <div class="col_fw">
+                    <div class="header-container">
+                        <h3 class="highlight-title">
+                            獎品名單
+                        </h3>
+                        {% include 'partials/drawing_groups.html' %}
+                    </div>
+
+                    <div class="table-container">
+                        {% for gift in gifts %}
+                        <div class="table-item">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h3 class="id-box {% if gift.drawn == 1 %}completed{% endif %}">
+                                                <span class="number-label">NO</span>
+                                                <span class="number">{{ gift.order_in_group }}</span>
+                                            </h3>
+                                        </td>
+                                        <td style="text-align: left !important;">
+                                            <h3 class="gift-header">
+                                                {{ gift.gift_name | safe }}
+                                            </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="amount-box">
+                                                {{ gift.quantity }}
+                                            </h3>
+                                        </td>
+                                        <td>
+                                            <h3>
+                                                <a class="btn" href="/draw/{{ gift.gift_id }}">
+                                                    {% if gift.drawn == 1 %}
+                                                    已抽出
+                                                    {% else %}
+                                                    抽獎
+                                                    {% endif %}
+                                                </a>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div> <!-- end of templatemo main -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div id="templatemo_footer">
+    Copyright &copy; 2024 ICPSI
+</div>
+{% endblock %}

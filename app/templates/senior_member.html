@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}資深同仁{% endblock %}
+
+{% block head %}
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+{% endblock %}
+
+{% block content %}
+<div id="templatemo_wrapper_outter">
+    <div id="templatemo_wrapper_inner">
+        <div id="templatemo_wrapper">
+            <div id="templatemo_header">
+                <div id="site_title">
+                    <h1></h1>
+                </div>
+            </div> <!-- end of header -->
+            <div class="outer-wrapper">
+                <div id="templatemo_main">
+                    <div class="col_fw">
+                        <table>
+                            <div class="header-container">
+                                <h3 class="highlight-title">
+                                    雲鼎卓越獎
+                                </h3>
+                                {% include 'partials/drawing_groups.html' %}
+                            </div>
+                            <div class="details">
+                                感謝你們一路的支持與努力，是加雲不可或缺的重要基石，再讓我們一起邁向下一個五年!
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly">
+                                <div><img src="{{ url_for('static', filename='images/senior_member/Mock.png') }}"
+                                        style="width: 100%;" alt="Alan"></div>
+                                <div><img src="{{ url_for('static', filename='images/senior_member/Mock.png') }}"
+                                        style="width: 100%;" alt="Sindia"></div>
+                                <div><img src="{{ url_for('static', filename='images/senior_member/Mock.png') }}"
+                                        style="width: 100%;" alt="Pony"></div>
+                                <div><img src="{{ url_for('static', filename='images/senior_member/Mock.png') }}"
+                                        style="width: 100%;" alt="Kos"></div>
+                            </div>
+                        </table>
+                    </div>
+                </div> <!-- end of templatemo main -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div id="templatemo_footer">
+    Copyright &copy; 2024 ICPSI
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+body{
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+td {
+    /* box-shadow: 0 0 0 0.5px #BE844A; */            
+    text-align: center;
+    padding: 22px;
+    color: rgba(97, 57, 43, 1);
+    font-size: 22px;
+}
+hr{
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+    width: 85%;
+    border: 1px solid #FFEED7;
+}
+.table-container {
+    display: flex;
+    justify-content: space-around;
+}
+#templatemo_wrapper{
+    width: 1400px;
+}
+#templatemo_main{
+    width: 100%;
+    box-sizing: border-box;
+}
+.col_fw{
+    width: 100%;
+    box-sizing: border-box;
+}

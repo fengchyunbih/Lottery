@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}新增獎項{% endblock %}
+
+{% block head %}
+<title>Christmas Night - Rising Stars</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    h1 {
+        font-size: 34px !important;
+        margin-bottom: 55px !important;
+        text-align: center;
+    }
+
+    .form-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .grouped-input {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid rgba(255, 209, 143, 1);
+        /* overflow: hidden; */
+        border-radius: 10px;
+        flex: 0 0 60%;
+        margin: 5px;
+        height: 40px;
+    }
+
+    .grouped-input select,
+    .grouped-input input {
+        border: none;
+        padding: 8px;
+        font-size: 18px;
+    }
+
+    .grouped-input select {
+        background-color: rgba(255, 209, 143, 1);
+        border-right: 1px solid #ccc;
+    }
+
+    .grouped-input input {
+        flex: 1;
+    }
+
+    .grouped-input select:focus-visible {
+        border: 1px solid rgba(97, 57, 43, 1);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .grouped-input input:focus-visible {
+        border: 1px solid rgba(97, 57, 43, 1);
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    input[type="number"] {
+        width: 90px;
+        padding: 8px;
+        font-size: 18px;
+        border-left: 1px solid rgba(255, 209, 143, 1);
+        flex: 0 0 20%;
+    }
+
+    button {
+        padding: 8px 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #addPrizeButton {
+        background-color: rgba(97, 57, 43, 1);
+        border-radius: 10px;
+        width: 90px;
+        font-size: 18px;
+        flex: 0 0 10%;
+    }
+
+    #templatemo_wrapper {
+        width: 50% !important;
+        margin: 5% auto !important;
+    }
+
+    #templatemo_main {
+        display: flex;
+        align-items: center;
+        height: 250px;
+    }
+
+    #prizeType {
+        background-color: rgba(255, 209, 143, 1);
+        border-radius: 10px;
+        height: 40px;
+        border: none;
+        color: rgba(97, 57, 43, 1);
+        font-size: 18px;
+        font-weight: 900;
+    }
+
+    @media (max-width: 768px) {
+
+        #templatemo_wrapper {
+            width: 70% !important;
+        }
+
+        #templatemo_main {
+            height: 450px;
+        }
+
+        h1 {
+            font-size: 25px !important;
+            margin-bottom: 35px !important;
+        }
+
+        .form-section {
+            flex-direction: column;
+        }
+
+        .grouped-input {
+            flex-direction: column;
+            width: 90%;
+            height: auto;
+        }
+
+        input[name="prizeQuantity[]"] {
+            width: 85%;
+            border-top: 1px solid rgba(255, 209, 143, 1);
+        }
+
+        .grouped-input select,
+        .grouped-input input {
+            width: 100%;
+            flex-direction: column;
+            /* 佔滿容器寬度 */
+            min-width: unset;
+            /* 取消最小寬度限制 */
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="templatemo_wrapper_outter">
+    <div id="templatemo_wrapper_inner">
+        <div id="templatemo_wrapper">
+            <div id="templatemo_header">
+                <div id="site_title">
+                    <h1></h1>
+                </div>
+            </div> <!-- end of header -->
+
+            <div class="outer-wrapper">
+
+                <div id="templatemo_main">
+                    <div class="col_fw">
+                        <h1 style="color: rgba(97, 57, 43, 1);">新增獎項</h1>
+
+                        <form method="post" class="form-section" action="/googleicp">
+                            <div class="form-section">
+                                <!-- 選單和輸入獎品名稱，連在一起 -->
+                                <select id="prizeType" name="prizeType">
+                                    {% for group in drawing_groups %}
+                                    <option value="{{ group.id }}" {% if loop.first %}selected{% endif %}>{{ group.name
+                                        }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <div id="inputContainer">
+                                    <div class="grouped-input">
+                                        <input type="text" name="prizeName[]" placeholder="請輸入獎品名稱">
+                                        <input type="number" name="prizeQuantity[]" placeholder="填寫數量" min="1">
+                                    </div>
+                                </div>
+
+                                <button type="button" onclick="addInput()">＋</button>
+
+                                <!-- 新增按鈕 -->
+                                <button type="submit" id="addGiftButton">新增</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div> <!-- end of templatemo main -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function addInput() {
+        var container = document.getElementById('inputContainer');
+        var newInput = document.createElement('div');
+        newInput.className = 'grouped-input';
+        newInput.innerHTML = `
+            <input type="text" name="prizeName[]" placeholder="請輸入獎品名稱">
+            <input type="number" name="prizeQuantity[]" placeholder="填寫數量" min="1">
+        `;
+        container.appendChild(newInput);
+    }
+</script>
+{% endblock %}
+
+{% block footer %}
+<div id="templatemo_footer">
+    Copyright &copy; 2024 ICPSI
+</div>
+{% endblock %}
